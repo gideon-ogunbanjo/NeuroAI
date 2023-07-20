@@ -1,2 +1,2 @@
 # NeuroAI
-NeuroAI - A Neural Network
+NeuroAI - A Digit Classification Neural Network
