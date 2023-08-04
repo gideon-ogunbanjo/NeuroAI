@@ -137,7 +137,7 @@ if __name__ == "__main__":
     test_prediction(2, W1, b1, W2, b2)
     test_prediction(3, W1, b1, W2, b2)
 # Save the neural network weights to numpy files
-np.save("path_to_W1.npy", W1)
-np.save("path_to_b1.npy", b1)
-np.save("path_to_W2.npy", W2)
-np.save("path_to_b2.npy", b2)
+# np.save("path_to_W1.npy", W1)
+# np.save("path_to_b1.npy", b1)
+# np.save("path_to_W2.npy", W2)
+# np.save("path_to_b2.npy", b2)
