@@ -1,4 +1,3 @@
-# Importing Libraries
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -39,10 +38,6 @@ X_train = X_train / 255.
 # Note: The variable 'm_train' is computed but not used later in the code. It seems like a typo or incomplete part.
 Y_train
 
-''' The Neural Network will have a simple two-layer architecture. Input layer - 𝑎[0], will have 784 units corresponding to the 784 
-pixels in each 28x28 input image. A hidden layer - 𝑎[1], will have 10 units with ReLU activation, and finally our output layer - 𝑎[2], 
-will have 10 units corresponding to the ten digit classes with softmax activation.
-'''
 def init_params():
     W1 = np.random.rand(10, 784) - 0.5
     b1 = np.random.rand(10, 1) - 0.5
@@ -113,17 +108,17 @@ def gradient_descent(X, Y, alpha, iterations):
             predictions = get_predictions(A2)
             print(get_accuracy(predictions, Y))
     return W1, b1, W2, b2
-W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.10, 500)
 
-# Running Predictions
-def make_predictions(X, W1, b1, W2, b2):
-    _, _, _, A2 = forward_prop(W1, b1, W2, b2, X)
-    predictions = get_predictions(A2)
-    return predictions
+def predict_digit(image, W1, b1, W2, b2):
+    image = image.reshape((-1, 1))
+    image = image / 255.0
+    _, _, _, A2 = forward_prop(W1, b1, W2, b2, image)
+    prediction = np.argmax(A2, axis=0)[0]
+    return prediction
 
 def test_prediction(index, W1, b1, W2, b2):
     current_image = X_train[:, index, None]
-    prediction = make_predictions(X_train[:, index, None], W1, b1, W2, b2)
+    prediction = predict_digit(X_train[:, index, None], W1, b1, W2, b2)
     label = Y_train[index]
     print("Prediction: ", prediction)
     print("Label: ", label)
@@ -133,8 +128,11 @@ def test_prediction(index, W1, b1, W2, b2):
     plt.imshow(current_image, interpolation='nearest')
     plt.show()
     
-# Running Tests
-test_prediction(0, W1, b1, W2, b2)
-test_prediction(1, W1, b1, W2, b2)
-test_prediction(2, W1, b1, W2, b2)
-test_prediction(3, W1, b1, W2, b2)
+if __name__ == "__main__":
+    W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.10, 500)
+
+    # Running Tests
+    test_prediction(0, W1, b1, W2, b2)
+    test_prediction(1, W1, b1, W2, b2)
+    test_prediction(2, W1, b1, W2, b2)
+    test_prediction(3, W1, b1, W2, b2)
