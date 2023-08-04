@@ -146,10 +146,10 @@ def main():
     st.write("Draw a digit below and let the app predict it!")
 
     # Loads the neural network weights
-    W1 = np.load("path_to_W1.npy")
-    b1 = np.load("path_to_b1.npy")
-    W2 = np.load("path_to_W2.npy")
-    b2 = np.load("path_to_b2.npy")
+    W1 = np.load("App/path_to_W1.npy")
+    b1 = np.load("App/path_to_b1.npy")
+    W2 = np.load("App/path_to_W2.npy")
+    b2 = np.load("App/path_to_b2.npy")
 
     # Streamlit canvas to draw the digit
     canvas_result = st_canvas(
