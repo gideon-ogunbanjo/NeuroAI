@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 from neural_network import predict_digit
 from PIL import Image
+from streamlit_drawable_canvas import st_canvas
 
 # Page configuration
 st.set_page_config(
@@ -18,28 +19,41 @@ def preprocess_image(image):
     return img_array
 
 def main():
-    st.title("Neural Network Digit Recognition")
+    st.title("NeuroAI - Neural Network Digit Recognition")
     st.write("Draw a digit from 0 to 9 and click 'Predict' to see the prediction.")
-    canvas = st.canvas(draw_text='Draw here:', height=150)
+    
+    # Use st_canvas to create the drawing canvas for drawing the digit
+    canvas_result = st_canvas(
+        fill_color="#000000",  # Background color of the canvas
+        stroke_width=10,
+        stroke_color="#ffffff",
+        background_color="#000000",
+        height=150,
+        width=150,
+        drawing_mode="freedraw",
+        key="canvas"
+    )
 
     if st.button("Predict"):
-        # Get the canvas image and preprocess it
-        img_data = canvas.image_data.astype(np.uint8)
-        img = Image.fromarray(img_data)
-        img_array = preprocess_image(img)
+        if canvas_result.image_data is not None:
+            # Get the canvas image and preprocess it
+            img_data = np.array(canvas_result.image_data).astype(np.uint8)
+            img = Image.fromarray(img_data)
+            img_array = preprocess_image(img)
 
-        # Predict the digit using the neural network
-        prediction = predict_digit(img_array, W1, b1, W2, b2)
-        st.write(f"Prediction: {prediction}")
+            # Load the neural network weights
+            # Replace the paths with the actual paths to your trained weights
+            W1 = np.load("path_to_W1.npy")
+            b1 = np.load("path_to_b1.npy")
+            W2 = np.load("path_to_W2.npy")
+            b2 = np.load("path_to_b2.npy")
+
+            # Predict the digit using the neural network
+            prediction = predict_digit(img_array, W1, b1, W2, b2)
+            st.write(f"Prediction: {prediction}")
+
 
 if __name__ == "__main__":
-    # Load the neural network weights
-    # Replace the paths with the actual paths to your trained weights
-    W1 = np.load("path_to_W1.npy")
-    b1 = np.load("path_to_b1.npy")
-    W2 = np.load("path_to_W2.npy")
-    b2 = np.load("path_to_b2.npy")
-
     main()
 # Footer with link
 link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
