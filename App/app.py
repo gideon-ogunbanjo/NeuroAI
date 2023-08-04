@@ -142,8 +142,8 @@ def preprocess_digit(canvas_result):
     return digit_image.reshape((-1, 1))
 
 def main():
-    st.title("Digit Classifier App")
-    st.write("Draw a digit below and let the app predict it!")
+    st.title("NeuroAI - Digit Classifier App")
+    st.write("Draw a digit below and let the NeuroAI predict it!")
 
     # Loads the neural network weights
     W1 = np.load("App/path_to_W1.npy")
