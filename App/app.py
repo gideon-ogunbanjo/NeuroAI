@@ -177,3 +177,6 @@ def main():
 # Run the Streamlit app
 if __name__ == "__main__":
     main()
+# Footer with link
+link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
+st.markdown(link, unsafe_allow_html=True)
