@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # reading the data
-data = pd.read_csv('../Data/train.csv')
+data = pd.read_csv('./Data/train.csv')
 
 data.head()
 data.shape
