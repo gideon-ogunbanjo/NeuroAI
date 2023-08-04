@@ -3,6 +3,12 @@ import numpy as np
 from neural_network import predict_digit
 from PIL import Image
 
+# Page configuration
+st.set_page_config(
+    page_title="NeuroAI",
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
 
 # Function to convert the image to grayscale and reshape it to (28, 28)
 def preprocess_image(image):
@@ -35,3 +41,6 @@ if __name__ == "__main__":
     b2 = np.load("path_to_b2.npy")
 
     main()
+# Footer with link
+link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
+st.markdown(link, unsafe_allow_html=True)
