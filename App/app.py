@@ -111,7 +111,6 @@ def gradient_descent(X, Y, alpha, iterations):
     return W1, b1, W2, b2
 
 
-
 def predict_digit(image, W1, b1, W2, b2):
     image = image.reshape((-1, 1))
     image = image / 255.0
@@ -119,9 +118,16 @@ def predict_digit(image, W1, b1, W2, b2):
     prediction = np.argmax(A2, axis=0)[0]
     return prediction
 
-# Save the neural network weights to numpy files
+# Saves the neural network weights to numpy files
+W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.10, 500)
 
-# Define the Streamlit app
+# np.save("path_to_W1.npy", W1)
+# np.save("path_to_b1.npy", b1)
+# np.save("path_to_W2.npy", W2)
+# np.save("path_to_b2.npy", b2)
+
+
+# Defines the Streamlit app
 def preprocess_digit(canvas_result):
     digit_image = canvas_result.image_data.astype('float32')
     digit_image = digit_image[0:28, 0:28]
@@ -133,7 +139,7 @@ def main():
     st.title("Digit Classifier App")
     st.write("Draw a digit below and let the app predict it!")
 
-    # Load the neural network weights
+    # Loads the neural network weights
     W1 = np.load("App/path_to_W1.npy")
     b1 = np.load("App/path_to_b1.npy")
     W2 = np.load("App/path_to_W2.npy")
@@ -151,7 +157,7 @@ def main():
         key="canvas",
     )
 
-    # Add a button to trigger prediction
+    # Adds a button to trigger prediction
     if st.button("Predict"):
         # Preprocess the drawn image
         digit_image = preprocess_digit(canvas_result)
